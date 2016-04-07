@@ -7,45 +7,65 @@ import static org.hamcrest.Matchers.*;
 
 public class BinarySearchTest {
 
+    public static int[] ONE_ELEMENT_SEQUENCE = new int[]{1};
+    public static int[] MULTI_ELEMENT_SEQUENCE = new int[]{1,2,3};
+    public static int NOT_FOUND_POSITION = -1;
+
     @Test
     public void search_ElementIsInOneElementSequence() throws Exception {
-        SearchResult searchResult = BinarySearch.search(1,new int[]{1});
+        int indexOfFirstElement = 0;
+        int firstElement = ONE_ELEMENT_SEQUENCE[indexOfFirstElement];
+
+        SearchResult searchResult = BinarySearch.search(firstElement,ONE_ELEMENT_SEQUENCE);
         assertThat(searchResult.isFound(), is(true));
-        assertThat(searchResult.getPosition(), is(0));
+        assertThat(searchResult.getPosition(), is(indexOfFirstElement));
     }
 
     @Test
     public void search_ElementIsNotInOneElementSequence() throws Exception {
-        SearchResult searchResult = BinarySearch.search(0,new int[]{1});
-        assertThat(searchResult.isFound(), is(true));
-        assertThat(searchResult.getPosition(), is(-1));
+        int elementNotInSequence = 0;
+
+        SearchResult searchResult = BinarySearch.search(elementNotInSequence,ONE_ELEMENT_SEQUENCE);
+        assertThat(searchResult.isFound(), is(false));
+        assertThat(searchResult.getPosition(), is(NOT_FOUND_POSITION));
     }
 
     @Test
     public void search_SearchElementIsFirstInMultiElementSequence() throws Exception {
-        SearchResult searchResult = BinarySearch.search(1,new int[]{1,2,3});
+        int indexOfFirstElement = 0;
+        int firstElement = MULTI_ELEMENT_SEQUENCE[indexOfFirstElement];
+
+        SearchResult searchResult = BinarySearch.search(firstElement,MULTI_ELEMENT_SEQUENCE);
         assertThat(searchResult.isFound(), is(true));
-        assertThat(searchResult.getPosition(), is(0));
+        assertThat(searchResult.getPosition(), is(indexOfFirstElement));
     }
 
     @Test
     public void search_ElementIsLastInMultiElementSequence() throws Exception {
-        SearchResult searchResult = BinarySearch.search(3,new int[]{1,2,3});
+        int indexOfLastElement = 2;
+        int lastElement = MULTI_ELEMENT_SEQUENCE[indexOfLastElement];
+
+        SearchResult searchResult = BinarySearch.search(lastElement,MULTI_ELEMENT_SEQUENCE);
         assertThat(searchResult.isFound(), is(true));
-        assertThat(searchResult.getPosition(), is(2));
+        assertThat(searchResult.getPosition(), is(indexOfLastElement));
     }
 
     @Test
     public void search_ElementIsMiddleInMultiElementSequence() throws Exception {
-        SearchResult searchResult = BinarySearch.search(2,new int[]{1,2,3});
+        int indexOfMiddleElement = 0;
+        int middleElement = ONE_ELEMENT_SEQUENCE[indexOfMiddleElement];
+
+        SearchResult searchResult = BinarySearch.search(middleElement,MULTI_ELEMENT_SEQUENCE);
         assertThat(searchResult.isFound(), is(true));
-        assertThat(searchResult.getPosition(), is(1));
+        assertThat(searchResult.getPosition(), is(indexOfMiddleElement));
     }
 
     @Test
     public void search_ElementIsNotInMultiElementSequence() throws Exception {
-        SearchResult searchResult = BinarySearch.search(4,new int[]{1,2,3});
+        int elementNotInSequence = 4;
+
+        SearchResult searchResult = BinarySearch.search(elementNotInSequence,MULTI_ELEMENT_SEQUENCE);
         assertThat(searchResult.isFound(), is(false));
-        assertThat(searchResult.getPosition(), is(-1));
+        assertThat(searchResult.getPosition(), is(NOT_FOUND_POSITION));
     }
 }
