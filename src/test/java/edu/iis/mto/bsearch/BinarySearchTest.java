@@ -10,6 +10,7 @@ public class BinarySearchTest {
     public static int[] ONE_ELEMENT_SEQUENCE = new int[]{1};
     public static int[] MULTI_ELEMENT_SEQUENCE = new int[]{1,2,3};
     public static int NOT_FOUND_POSITION = -1;
+    public static int[] ZERO_LENGTH_SEQUENCE = new int[]{};
 
     @Test
     public void search_ElementIsInOneElementSequence() throws Exception {
@@ -67,5 +68,11 @@ public class BinarySearchTest {
         SearchResult searchResult = BinarySearch.search(elementNotInSequence,MULTI_ELEMENT_SEQUENCE);
         assertThat(searchResult.isFound(), is(false));
         assertThat(searchResult.getPosition(), is(NOT_FOUND_POSITION));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void search_SequenceIsZeroLength() throws Exception{
+        int element = 1;
+        BinarySearch.search(element, ZERO_LENGTH_SEQUENCE);
     }
 }
