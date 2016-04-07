@@ -16,7 +16,7 @@ public class BinarySearchTest {
 
     @Test
     public void search_ElementIsNotInOneElementSequence() throws Exception {
-        SearchResult searchResult = BinarySearch.search(1,new int[]{0});
+        SearchResult searchResult = BinarySearch.search(0,new int[]{1});
         assertThat(searchResult.isFound(), is(true));
         assertThat(searchResult.getPosition(), is(-1));
     }
