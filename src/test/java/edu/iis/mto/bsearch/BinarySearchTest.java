@@ -7,10 +7,12 @@ import static org.hamcrest.Matchers.*;
 
 public class BinarySearchTest {
 
-    public static int[] ONE_ELEMENT_SEQUENCE = new int[]{1};
-    public static int[] MULTI_ELEMENT_SEQUENCE = new int[]{1,2,3};
-    public static int NOT_FOUND_POSITION = -1;
-    public static int[] ZERO_LENGTH_SEQUENCE = new int[]{};
+    public static final int[] ONE_ELEMENT_SEQUENCE = new int[]{1};
+    public static final int[] MULTI_ELEMENT_SEQUENCE = new int[]{1,2,3};
+    public static final int NOT_FOUND_POSITION = -1;
+    public static final int[] ZERO_LENGTH_SEQUENCE = new int[]{};
+    public static final int DUMMY_ELEMENT = 1;
+    
 
     @Test
     public void search_ElementIsInOneElementSequence() throws Exception {
@@ -72,7 +74,11 @@ public class BinarySearchTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void search_SequenceIsZeroLength() throws Exception{
-        int element = 1;
-        BinarySearch.search(element, ZERO_LENGTH_SEQUENCE);
+        BinarySearch.search(DUMMY_ELEMENT, ZERO_LENGTH_SEQUENCE);
+    }
+    
+    @Test(expected = NullPointerException.class)
+    public void search_SequenceIsNull() throws Exception{
+    	BinarySearch.search(DUMMY_ELEMENT, null);
     }
 }
