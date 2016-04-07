@@ -9,9 +9,10 @@ public class BinarySearchTest {
 
     public static final int[] ONE_ELEMENT_SEQUENCE = new int[]{1};
     public static final int[] MULTI_ELEMENT_SEQUENCE = new int[]{1,2,3};
-    public static final int NOT_FOUND_POSITION = -1;
     public static final int[] ZERO_LENGTH_SEQUENCE = new int[]{};
+    public static final int[] NOT_SORTED_SEQUENCE = new int[]{3,1,2};
     public static final int DUMMY_ELEMENT = 1;
+    public static final int NOT_FOUND_POSITION = -1;
     
 
     @Test
@@ -80,5 +81,15 @@ public class BinarySearchTest {
     @Test(expected = NullPointerException.class)
     public void search_SequenceIsNull() throws Exception{
     	BinarySearch.search(DUMMY_ELEMENT, null);
+    }
+    
+    @Test
+    public void search_SequenceIsNotSorted() throws Exception{
+    	int indexOfElementToFind = 0;
+    	int elementToFind = NOT_SORTED_SEQUENCE[indexOfElementToFind];
+    	
+    	SearchResult searchResult = BinarySearch.search(elementToFind, NOT_SORTED_SEQUENCE);
+    	assertThat(searchResult.isFound(), is(false));
+    	assertThat(searchResult.getPosition(), is(NOT_FOUND_POSITION));
     }
 }
